@@ -22,8 +22,9 @@ namespace Angelo_Maureira.Controllers
         // GET: Proveedors
         public async Task<IActionResult> Index()
         {
-            var comercialSantaClaraContext = _context.Proveedores.Include(p => p.Ubicacion);
-            return View(await comercialSantaClaraContext.ToListAsync());
+              return _context.Proveedores != null ? 
+                          View(await _context.Proveedores.ToListAsync()) :
+                          Problem("Entity set 'ComercialSantaClaraContext.Proveedores'  is null.");
         }
 
         // GET: Proveedors/Details/5
@@ -35,7 +36,6 @@ namespace Angelo_Maureira.Controllers
             }
 
             var proveedor = await _context.Proveedores
-                .Include(p => p.Ubicacion)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (proveedor == null)
             {
@@ -48,7 +48,6 @@ namespace Angelo_Maureira.Controllers
         // GET: Proveedors/Create
         public IActionResult Create()
         {
-            ViewData["UbicacionId"] = new SelectList(_context.Ubicaciones, "Id", "Nombre");
             return View();
         }
 
@@ -65,7 +64,6 @@ namespace Angelo_Maureira.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UbicacionId"] = new SelectList(_context.Ubicaciones, "Id", "Nombre", proveedor.UbicacionId);
             return View(proveedor);
         }
 
@@ -82,7 +80,6 @@ namespace Angelo_Maureira.Controllers
             {
                 return NotFound();
             }
-            ViewData["UbicacionId"] = new SelectList(_context.Ubicaciones, "Id", "Nombre", proveedor.UbicacionId);
             return View(proveedor);
         }
 
@@ -118,7 +115,6 @@ namespace Angelo_Maureira.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UbicacionId"] = new SelectList(_context.Ubicaciones, "Id", "Nombre", proveedor.UbicacionId);
             return View(proveedor);
         }
 
@@ -131,7 +127,6 @@ namespace Angelo_Maureira.Controllers
             }
 
             var proveedor = await _context.Proveedores
-                .Include(p => p.Ubicacion)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (proveedor == null)
             {

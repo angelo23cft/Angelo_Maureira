@@ -19,6 +19,5 @@ namespace Angelo_Maureira.Models
         [ForeignKey("Ubicacion")]
         public int UbicacionId { get; set; }
 
-        public virtual Ubicacion Ubicacion { get; set; }
     }
 }
