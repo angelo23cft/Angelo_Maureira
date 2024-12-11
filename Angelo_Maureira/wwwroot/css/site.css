@@ -1,18 +1,19 @@
 html {
-  font-size: 14px;
+    font-size: 18px; /* Incrementa el tamaño base */
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-html {
-  position: relative;
-  min-height: 100%;
+    html {
+        font-size: 20px; /* Tamaño mayor para pantallas medianas */
+    }
 }
 
 body {
-  margin-bottom: 60px;
+    margin: 0;
+    background-image: url('../images/Fondo.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    color: #fff;
 }

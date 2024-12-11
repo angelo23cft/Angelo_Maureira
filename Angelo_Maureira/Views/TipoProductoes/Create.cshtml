@@ -1,43 +1,52 @@
 ﻿@model Angelo_Maureira.Models.TipoProducto
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Crear Tipo de Producto";
 }
 
-<h1>Create</h1>
+<div class="container mt-5">
+    <h1 class="text-primary">Crear Tipo de Producto</h1>
+    <div class="card mt-4 shadow">
+        <div class="card-header bg-success text-white">
+            <strong>Formulario de Creación</strong>
+        </div>
+        <div class="card-body">
+            <form asp-action="Create">
+                @Html.AntiForgeryToken()
 
-<h4>TipoProducto</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Nombre" class="control-label"></label>
-                <input asp-for="Nombre" class="form-control" />
-                <span asp-validation-for="Nombre" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Descripcion" class="control-label"></label>
-                <input asp-for="Descripcion" class="form-control" />
-                <span asp-validation-for="Descripcion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Estado" class="control-label"></label>
-                <input asp-for="Estado" class="form-control" />
-                <span asp-validation-for="Estado" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+                <div class="form-group mb-3">
+                    <label asp-for="Nombre" class="form-label">Nombre del Tipo de Producto <span class="text-danger">*</span></label>
+                    <input asp-for="Nombre" class="form-control" placeholder="Ingrese el nombre del tipo de producto" />
+                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Descripcion" class="form-label">Descripción</label>
+                    <textarea asp-for="Descripcion" class="form-control" placeholder="Ingrese una descripción"></textarea>
+                    <span asp-validation-for="Descripcion" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Estado" class="form-label">Estado</label>
+                    <select asp-for="Estado" class="form-select">
+                        <option value="">Seleccione un estado</option>
+                        <option value="Activo">Activo</option>
+                        <option value="Inactivo">Inactivo</option>
+                    </select>
+                    <span asp-validation-for="Estado" class="text-danger"></span>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <input type="submit" value="Guardar" class="btn btn-success" />
+                    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
